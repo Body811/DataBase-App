@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :focus {
+    outline: none;
+  }
+
+  html {
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    height: 100%;
+    width: 100%;
+    background-color: #eceef2;
+    font-family: Arial, sans-serif;
+    display: grid;
+    place-items: center;
+    color: #ffff;
+  }
+  .container {
+ 
+    background-color: #2c3141e5;
+    border-radius: 20px;
+    box-shadow: 0 3px 1rem rgb(0, 0, 0);
+    text-align: center;
+    max-height: 100%;
+    max-width: 100%;
+    overflow: auto;
+  }
+  h1 {
+    color: white;
+    text-align: center;
+    margin: 20px;
+  }
+  .container-header {
+    border-bottom: #ff6410 solid 1px;
+    margin: 5px 30px;
+  }
+  .error {
+    color: #ff0000;
+    font-size: 1.2em;
+    margin: 20px;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  input[type="text"],
+  input[type="password"] {
+    width: 80%;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 10%;
+    font-size: 1.2em;
+    color: #ff6410;
+  }
+
+  input[type="text"]::placeholder,
+  input[type="password"]::placeholder {
+    color: #ff6410;
+  }
+
+  input[type="submit"] {
+    background-color: #ff6410;
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+  }
+  input[type="submit"]:hover {
+    background-color: #cc5500;
+  }
+  .links {
+    text-align: center;
+    margin: 20px;
+    font-size: 1.2em;
+  }
+  .links a {
+    word-spacing: 2px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .links a:hover {
+    color: #ff6410;
+    text-decoration: underline;
+  }
+

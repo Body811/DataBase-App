@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration Page</title>
+	
+	<style>
+            * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+        :focus {
+            outline: none;
+        }
+        html {
+            height: 100%;
+            width: 100%;
+        }
+        body {
+            height: 100%;
+            width: 100%;
+            background-color: #eceef2;
+            font-family: Arial, sans-serif;
+            display: grid;
+            place-items: center;
+            color: #ffff;
+        }
+		.container {
+			/* visibility: hidden; */
+			background-color: #2c3141e5;
+			border-radius: 20px;
+			box-shadow: 0 3px 1rem rgb(0, 0, 0);
+			text-align: center;
+			max-height: 100%;
+			max-width: 100%;
+            height: 70%;
+            width: 30%;
+			overflow: auto;
+            /* text-align: left; */
+            margin: auto;
+		}
+
+		h1 {
+			color: white;
+			text-align: center;
+			margin: 20px;
+		}
+
+		.container-header {
+			border-bottom: #ff6410 solid 1px;
+			margin: 5px 30px;
+		}
+
+		input[type="text"],
+		input[type="password"],
+		input[type="email"],
+		input[type="date"] {
+			width: 75%;
+			padding: 8px;
+			border-radius: 10px;
+			border: none;
+			margin: 30px;
+			font-size:1.2em;
+			color: #ff6410;
+		}
+
+		input[type="text"]::placeholder,
+		input[type="password"]::placeholder,
+		input[type="email"]::placeholder,
+		input[type="date"]::placeholder {
+			color: #ff6410;
+		}
+
+		input[type="submit"] {
+			background-color: #ff6410;
+			color: #fff;
+			padding: 15px;
+			border-radius: 15px;
+			border: none;
+			cursor: pointer;
+			width: 30%;
+			font-size: 1.2em;
+			transition: background-color 0.3s ease;
+            margin-bottom: 15px;
+            
+		}
+
+		input[type="submit"]:hover {
+			background-color: #cc5500;
+		}
+
+		.links {
+			text-align: center;
+			margin: 20px;
+			font-size: 1.2em;
+		}
+
+		.links a {
+			word-spacing: 2px;
+			color: white;
+			text-decoration: none;
+			transition: color 0.3s ease;
+		}
+
+		.links a:hover {
+			color: #ff6410;
+			text-decoration: underline;
+			
+		}
+
+		.error {
+		color: #ff0000;
+		font-size: 1.2em;
+		margin: 20px;
+		opacity: 0;
+		transition: all 0.5s;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>User Registration</h1>
+		<div class="container-header"></div>
+		<div class="error">Could not Create Account</div>
+		<form>
+			<input type="text" id="username" name="username" placeholder="Enter your username"><br>
+
+			<input type="password" id="password" name="password" placeholder="Enter your password"><br>
+
+			<input type="email" id="email" name="email" placeholder="Enter your email"><br>
+
+			<input type="date" id="birthdate" name="birthdate"><br>
+
+			<input type="submit" value="Register">
+		</form>
+		<div class="links">
+		<a href="login.html">Log in here</a>
+		</div>
+	</div>
+	<script type="text/javascript" src="/eel.js"></script>
+	<script>
+
+		async function addcustomer(name, password, email, birthdate) {
+			return await eel.addcustomer(name, password, email, birthdate)();
+		}
+
+		let form = document.querySelector("form");
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			let formdata = new FormData(form);
+			let username = formdata.get("username");
+			let password = formdata.get("password");
+			let email = formdata.get("email");
+			let birthdate = formdata.get("birthdate");
+			console.log(username)
+			console.log(password)
+			console.log(email)
+			console.log(birthdate)
+			let error = document.querySelector(".error");
+			let isSuccess = await addcustomer(username, password, email, birthdate);
+			if (isSuccess) {
+			customerId = await eel.getCustomerId(username)()
+			localStorage.setItem('customerId',customerId)
+			window.location.href = "MainPage.html";
+			} else {
+			error.style.opacity = 1;
+			}
+		});
+
+</script>
+
+</body>
+</html

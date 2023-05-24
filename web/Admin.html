@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    <script src="/eel.js"></script> 
+    <link rel="stylesheet" href="Admin.css">
+  </head>
+  <body>
+    <div id = "wrapper">  
+      <header>
+        <nav class = "nav">
+          <div class = logo>
+           <a href="#"> <h4>TITLE</h4></a>
+          </div>
+          <ul class = "menu">
+            <li> <a href="#" onclick="location.reload()"> Home </a> </li>
+            <li> <a href="#add-aircraft-containerid" onclick="showAircraftContainer()"> Add Aircraft </a> </li>
+            <li> <a href="#update-aircraft-containerid" onclick="showAircraftUpdateContainer()"> Update Aircraft </a> </li>
+            <li> <a href="#add-flight-containerid"onclick="showFlightContainer()"> Add Flight </a> </li>
+            <li> <a href="#statistics-tableid"onclick="getStatistics()"> Show Statistics </a> </li>
+          </ul>
+          <div class="logout">
+          <a href="login.html"> Logout </a> 
+          </div>
+        </nav>
+    </div>
+      </header>
+    <div class="background"></div>
+    <div class ="main-text" id="main-textid">
+      AFFORDABLE FLIGHTS & <br> QUICK BOOKING
+    <div class="mini-text">
+      Best Site for Booking Flights for Vacations or Work      
+    </div>
+    </div>
+    <div class="search-container"> 
+        <form class="search">
+          <span class="from-text"><label for="from">From</label></span>
+          <span class="to-text"><label for = "text">To</label></span>
+          <input type="text" class="from" name="from" placeholder="From" >
+          <input type="text" class="to" name="to" placeholder="TO" >
+          <input class="search-btn" type="button" value="Search">
+        </form>
+    </div>
+    <div class="table-container">
+      <div class="search-error"> No Flights Available Match Your Search Criteria </div>
+      <table class="search-table">
+        <thead>
+          <tr>
+            <th>Flight ID</th>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Departure Date</th>
+            <th>Arrival Date</th>
+            <th>Price</th>
+            <th>Aircraft ID</th>
+            <th>model</th>
+            <th>No. of Business Seats</th>
+            <th>No. of Economy Seats</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div class="success-message">Operation Done Successfully</div>
+    <div class="add-aircraft-container" id="add-aircraft-containerid">
+      <form class="add-aircraft-form">
+        <span class="aircraftId-text"><label for="aircraftId">Aircraft ID</label></span>
+        <span class="model-text"><label for="model">Model</label></span>
+        <span class="buss-seat-num-text"><label for="buss-seat-num">No. of Business Seats</label></span>
+        <span class="eco-seat-num-text"><label for="seat-num">No. of Economy Seats</label></span>
+        
+        <input type="number" name="aircraftId" class="aircraftId" min="0" placeholder="Aircraft ID">
+        <input type="text" name="model" placeholder="Model">
+        <input type="number" name="buss-seat-num" class="buss-seat-num" min="0" placeholder="No. of Business Seats">
+        <input type="number" name="eco-seat-num" class="eco-seat-num" min="0" placeholder="No. of Economy Seats">
+        <input type="button" class="add-aircraft-btn" value="Add Aircraft">
+      </form>
+    </div>
+    <div class="update-aircraft-container" id="update-aircraft-containerid">
+      <form class="update-aircraft-form">
+        <span class="aircraft-id-text"><label for="aircraft-id-text">Aircraft ID</label></span>
+        <span class="aircraft-attribute-text"><label for="aircraft-attribute">Attribute</label></span>
+        <span class="aircraft-value-text"><label for="aircraft-value">Value</label></span>
+        
+        <input type="number" name="update-aircraft-id" class="aircraft-id" min="0" placeholder="Aircraft ID">
+        <select name="attribute" class="attribute" placeholder="Attribute">
+          <option value="model">Model</option>
+          <option value="bussinesSeatNum">No. of Business Seats</option>
+          <option value="economySeatNum">No. of Economy Seats</option>  
+        </select>
+        <input type="text" name="value" class="value"placeholder="Value">   
+        <input type="button" class="update-aircraft-btn" value="Update Aircraft">
+      </form>
+    </div>
+    <div class="add-flight-container" id="add-flight-containerid">
+      <form class="add-flight-form">
+        <span><label>Flight ID</label></span>
+        <span><label>Aircraft ID</label></span>
+        <span><label>Departure Date</label></span>
+        <span><label>Arrival Date</label></span>
+        <span><label>Source</label></span>
+        <span><label>Destination</label></span>
+        <span><label>Price</label></span>
+
+        <input type="number"  min="0" class="flightid" name="flightid"placeholder="Flight ID" id="">
+        <input type="number" min="0" name="aircraftid" placeholder ="Aircraft ID "id="">
+        <input type="datetime-local" name="departuredate"placeholder ="Departure Date " id="">
+        <input type="datetime-local" name="arrivaldate"placeholder ="Arrival Date " id="">
+        <input type="text" name="source"placeholder ="Source " id="">
+        <input type="text" name="destination"placeholder ="Destination " id="">
+        <input type="number" min="0" name="price"placeholder ="Price " id="">
+        <input type="button" class ="add-flight-btn" value="Add Flight">
+      </form>
+    </div>
+
+    <div class="statistics-table-container">
+      <table class="statistics-table" id="statistics-tableid">
+        <thead>
+          <tr>
+            <th>Total Number of Aircrafts</th>
+            <th>Total Number of Flights</th>
+            <th>Total Number of Customers</th>
+            <th>Total Number of Admins</th>
+            <th>Total Number of Seats</th>
+            <th>Customer Booked Most Seats </th>
+            <th>Most Seats Booked by One Person</th>
+          </tr>
+        </thead>
+        <tbody class="ttbody">
+        </tbody>
+      </table>
+    </div>
+    <footer>
+        <table>
+          <tr>
+            <th>About</th>
+            <th>Contact US</th>
+            <th>Social Media</th>
+          </tr>
+          <tr>
+            <td><a href="about-us.html">Creators</a></td>
+            <td><span>Contact</span></td>
+            <td><img src="img/instgram-icon.png"><span>Instgram</span></td>
+          </tr>
+          <tr>
+            <td><span>Customers</p></td>
+            <td><span>Sponsorships</span></td>
+            <td><img src="img/facebook-icon.png"><span>Facebook</span></td>
+          </tr>
+          <tr>
+            <td><span>Terms of Service</span></td>
+            <td><span>Support</span></td>
+            <td><img src="img/twitter-icon.png"><span>Twitter</span></td>
+          </tr>
+        </table>
+    </footer>
+    <script src="Admin.js"></script>
+  </body>
+</html>
