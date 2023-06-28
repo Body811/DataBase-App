@@ -169,5 +169,5 @@ class AircraftDB:
     
         
         
-aircraftdb = AircraftDB()
-aircraftdb.displayAircrafts()
+# aircraftdb = AircraftDB()
+# aircraftdb.displayAircrafts()

@@ -32,7 +32,6 @@ function showAircraftContainer(){
     hideAircraftUpdateContainer()
     hideFlightContainer()
 
-    consol.log(document.querySelector('.success-message'))
 }
 
 
@@ -55,11 +54,16 @@ function showFlightContainer(){
     hideAircraftContainer()
 }
 
-hideAircraftContainer()
-hideAircraftUpdateContainer()
-hideFlightContainer()
-hideStatisticsContainer()
-hideSearchTable()
+
+function home(){
+
+    hideSearchTable()
+    hideStatisticsContainer()
+    hideAircraftUpdateContainer()
+    hideAircraftContainer()
+    hideFlightContainer()
+}
+
 
 function hideAircraftContainer(){
 
@@ -83,6 +87,7 @@ function hideFlightContainer(){
 function hideStatisticsContainer(){
     document.querySelector(".statistics-table-container").style.opacity = 0;
     document.querySelector(".statistics-table-container").style.top = '0';
+    document.querySelector(".statistics-table-container").style.display = "none";
 
 }
 
@@ -161,6 +166,10 @@ button.addEventListener("click", async (event) => {
             error.style.opacity = 0;
             table.style.opacity = 1;    
             document.querySelector('.table-container').style.top = '115%';
+            hideAircraftContainer()
+            hideAircraftUpdateContainer()
+            hideFlightContainer()
+            hideStatisticsContainer()
     }else{
         error.style.opacity = 1; 
         hideSearchTable()
@@ -184,12 +193,15 @@ aircraftbtn.addEventListener("click",  async () => {
     let bussinesSeatNum = formdata.get("buss-seat-num");
     let economySeatNum = formdata.get("eco-seat-num");
     console.log(aircraftId)
+    console.log(form)
+    console.log(model)
+    console.log(bussinesSeatNum)
+    console.log(economySeatNum)
     let isSuccess = await addAircraft(aircraftId,model,bussinesSeatNum,economySeatNum);
         if (isSuccess) {
             document.querySelector('.success-message').style.opacity = 1;
             setTimeout(() => {document.querySelector('.success-message').style.opacity = 0}, 3000);
-            
-
+        
         } else {
             console.log("Error: could not add aircraft")
         }
@@ -217,9 +229,9 @@ aircraftUpdatebtn.addEventListener('click', async () => {
     if (isSuccess) {
         document.querySelector('.success-message').style.opacity = 1;
         setTimeout(() => {document.querySelector('.success-message').style.opacity = 0}, 3000);
-
+    
     } else {
-        console.log("Error: could not add aircraft")
+        console.log("Error: could update add aircraft")
     }
 })
 
@@ -248,13 +260,13 @@ async function addFlight(id, aircraftId, departureDate, arrivalDate, source, des
      console.log(destination)
      console.log(price)
      let isSuccess = await addFlight(id, aircraftId, departureDate, arrivalDate, source, destination,price);
-     if (isSuccess) {
+    if (isSuccess) {
         document.querySelector('.success-message').style.opacity = 1;
         setTimeout(() => {document.querySelector('.success-message').style.opacity = 0}, 3000);
         
 
     } else {
-        console.log("Error: could not add aircraft")
+        console.log("Error: could not add Flight")
     }
  })
 
@@ -296,6 +308,7 @@ async function getStatistics(){
    
 
     document.querySelector(".statistics-table-container").style.opacity = 1;
+    document.querySelector(".statistics-table-container").style.display = "block";
     document.querySelector(".statistics-table-container").style.top = '130%';
 
 }

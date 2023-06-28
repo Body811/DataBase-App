@@ -127,4 +127,4 @@ admidDB = AdminDB()
 
 # admidDB.addAdmin("abdo",123)
 
-admidDB.displayAdmins() 
+# admidDB.addAdmin('mohanned',123)

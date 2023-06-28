@@ -11,14 +11,14 @@
       <header>
         <nav class = "nav">
           <div class = logo>
-           <a href="#"> <h4>TITLE</h4></a>
+           <a href="#"> <h4>Admin</h4></a>
           </div>
           <ul class = "menu">
-            <li> <a href="#" onclick="location.reload()"> Home </a> </li>
-            <li> <a href="#add-aircraft-containerid" onclick="showAircraftContainer()"> Add Aircraft </a> </li>
-            <li> <a href="#update-aircraft-containerid" onclick="showAircraftUpdateContainer()"> Update Aircraft </a> </li>
-            <li> <a href="#add-flight-containerid"onclick="showFlightContainer()"> Add Flight </a> </li>
-            <li> <a href="#statistics-tableid"onclick="getStatistics()"> Show Statistics </a> </li>
+            <li> <a href="#" onclick="home()"> Home </a> </li>
+            <li> <a href="#search-container1" onclick="showAircraftContainer()"> Add Aircraft </a> </li>
+            <li> <a href="#search-container1" onclick="showAircraftUpdateContainer()"> Update Aircraft </a> </li>
+            <li> <a href="#search-container1"onclick="showFlightContainer()"> Add Flight </a> </li>
+            <li> <a href="#search-container1"onclick="getStatistics()"> Show Statistics </a> </li>
           </ul>
           <div class="logout">
           <a href="login.html"> Logout </a> 
@@ -33,7 +33,7 @@
       Best Site for Booking Flights for Vacations or Work      
     </div>
     </div>
-    <div class="search-container"> 
+    <div class="search-container" id="search-container1"> 
         <form class="search">
           <span class="from-text"><label for="from">From</label></span>
           <span class="to-text"><label for = "text">To</label></span>
@@ -58,12 +58,13 @@
             <th>No. of Business Seats</th>
             <th>No. of Economy Seats</th>
           </tr>
+          
         </thead>
         <tbody>
         </tbody>
       </table>
     </div>
-    <div class="success-message">Operation Done Successfully</div>
+    <div class="success-message" id="success-message" >Operation Done Successfully</div>
     <div class="add-aircraft-container" id="add-aircraft-containerid">
       <form class="add-aircraft-form">
         <span class="aircraftId-text"><label for="aircraftId">Aircraft ID</label></span>

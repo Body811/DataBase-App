@@ -154,8 +154,11 @@ class FlightDB:
         
         result = []
         for f in self.flights:
+            print(f"{f.source,f.destination}  { source, destination}")
             availableSeats = seatDB.getAvailableSeats(f.aircraftId, classType)
-            if f.source.lower() == source.lower() and f.destination.lower() == destination.lower() and int(availableSeats) >= int(requiredSeats):
+            test =  f.source.lower() == source.lower() and f.destination.lower() == destination.lower() and int(availableSeats) >= int(requiredSeats)
+            print(availableSeats)
+            if test:
                 result.append({
                     'id': f.id, 
                     'departureDate': str(f.departureDate), 
@@ -164,6 +167,7 @@ class FlightDB:
                     'destination': f.destination,
                     'availableSeats': availableSeats, 
                     'price': f.price})
+        print(result)
         return result
 
     
@@ -243,14 +247,14 @@ class FlightDB:
             self.flights.clear()
             print("Flights database cleared successfully.")
         except pyodbc.Error as e:
-            print(f"Error clearing flights database: {e}")
+            print(f"Error clearing flights database: {e}")  
             
     def getFlightQuantity(self):
         cursor.execute('SELECT COUNT(*) FROM FlightDB')
         count = cursor.fetchone()[0]
         return count
 
-# flightdb = FlightDB() 
+flightdb = FlightDB() 
 
 # flightdb.addFlight(0,0,'2022-05-10 09:00:00','2022-05-10 12:00:00','Egypt','Colombia',69)
 
@@ -258,3 +262,6 @@ class FlightDB:
 # flightdb.removeFlight(0)
 # flightdb.displayFlights()
 
+# test = flightdb.getFlights('Egypt','Colombia','Economy',3)
+
+# print(test)

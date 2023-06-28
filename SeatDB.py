@@ -104,6 +104,8 @@ class SeatDB:
         else:
             print(f"Seats with Aircraft ID {aircraftId} does not exist.")
 
+
+
     def displaySeats(self):
         self.seats.sort(key=lambda seat: int(seat.id.split("#")[1]))
         if not self.seats:
@@ -113,12 +115,14 @@ class SeatDB:
             for a in self.seats:
                 print(f"{a.id:<10}{a.classType:^30}{str(a.aircraftId):^30}{str(a.customerId):^30}")
 
+
+
     def bookSeat(self,aircraftid,custId,classType, seatnum):
         while(seatnum > 0):
             flag = False
             for s in self.seats:
                 if s.aircraftId == aircraftid and s.classType.lower() == classType.lower() and s.customerId is None:
-                    print("test1")
+                    print(f"seatnum: {seatnum}")
                     
                     flag = True
                     break
@@ -127,12 +131,13 @@ class SeatDB:
                 try:
                     print("test2")
                     cursor.execute(f"""UPDATE SeatDB SET CustomerId = ?
-                                    WHERE AircraftID = ?
-                                    """,(custId, aircraftid))
+                                    WHERE id = ?
+                                    """,(custId, s.id))
                     conn.commit()
                     self.refreshDB()
                     print("Seat Booked Successfully.")
                     seatnum -= 1
+                    print(f"seatnum: {seatnum}")
                 except pyodbc.Error as e:
                     print(f"Error Booking Seat: {e}")
             else:
@@ -141,8 +146,10 @@ class SeatDB:
         
     def getAvailableSeats(self, aircraftId,classType):
         count = 0
+        print(f'{ aircraftId, classType, count }')
         for s in self.seats:
             if s.aircraftId == aircraftId and s.classType.lower() == classType.lower() and s.customerId is None:
+                print(f"{s.aircraftId ,s.classType, s.customerId}")
                 count+=1
     
         return count
@@ -150,7 +157,7 @@ class SeatDB:
     def getSeats(self, customerid):
         result = []
         for s in self.seats:
-            if str(s.customerId) == str(customerid):
+            if s.customerId == int(customerid):
                 result.append({
                     'seatid': s.id, 
                     'classType': s.classType})
@@ -175,5 +182,6 @@ class SeatDB:
     
 # seatDB = SeatDB()
 
-
+# # seatDB.bookSeat(0,0,'business',10)
+# print(seatDB.getAvailableSeats(2,"economy"))
 # seatDB.displaySeats()

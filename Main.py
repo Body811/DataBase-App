@@ -36,13 +36,17 @@ def getCustomerId(name):
 
 @eel.expose
 def getFlights(source, destination, classType, requiredSeats):
-    test = flightDB.getFlights(source, destination, classType, int(requiredSeats))
+    print(f"{source, destination, classType, requiredSeats}")
+    test = flightDB.getFlights(source, destination, classType, requiredSeats)
+    print(test)
     return test
 
 @eel.expose
 def bookFlight(flightId, customerId, classType, seatNum):
-    aircraftId = flightDB.getAircraftId(flightId)
-    seatDB.bookSeat(int(aircraftId),int(customerId),classType,int(seatNum))
+    aircraftId = flightDB.getAircraftId(int(flightId))
+    
+    print(f"{aircraftId,int(customerId),classType,int(seatNum)}")
+    seatDB.bookSeat(aircraftId,int(customerId),classType,int(seatNum))
     
 @eel.expose
 def getSeats(customerId):
@@ -121,4 +125,5 @@ def getMaxSeat():
     return seatDB.getMaxSeat()            
 
 eel.start('login.html',)
+
 

@@ -1,6 +1,4 @@
  
-
-
 let customerId = localStorage.getItem('customerId') 
  
  //Changes the Navbar When You Start Scrolling 
@@ -20,6 +18,64 @@ window.addEventListener('scroll', () => {
     img.classList.toggle('background-blurred',scrollPos);
     text.classList.toggle('background-blurred',scrollPos);
 });
+
+
+
+
+function home(){
+    hideSearchTable()
+    hideMyFlightTable()
+    hideBookContainer()
+    hideEditContainer()
+    hideUpdateCustomerContainer()
+
+}
+
+function hideSearchTable(){
+    document.querySelector(".search-table").style.opacity = 0;
+    document.querySelector(".success-message").style.opacity = 0
+    document.querySelector(".edit-error").style.opacity = 0
+
+}
+
+function hideMyFlightTable(){
+    document.querySelector(".myflight-table-container").style.opacity = 0
+    document.querySelector(".success-message").style.opacity = 0
+    document.querySelector(".edit-error").style.opacity = 0
+
+}
+
+function hideBookContainer(){
+    document.querySelector(".book-container").style.opacity = 0
+    document.querySelector(".success-message").style.opacity = 0
+    document.querySelector(".edit-error").style.opacity = 0
+
+
+
+
+
+
+}
+
+function hideEditContainer(){
+    document.querySelector(".edit-container").style.opacity = 0
+    document.querySelector(".success-message").style.opacity = 0
+    document.querySelector(".edit-error").style.opacity = 0
+
+
+}
+
+
+
+function hideUpdateCustomerContainer(){
+    document.querySelector('.update-customer-container').style.opacity = 0
+    document.querySelector(".success-message").style.opacity = 0
+    document.querySelector(".edit-error").style.opacity = 0
+}
+
+
+
+
 
 
 
@@ -45,15 +101,21 @@ async function getFlights(from, to, classtype, seatNum) {
 }
 
 //Displays Search Results In Table
-form = document.querySelector('.search');
 button = document.querySelector('.search-btn');
 button.addEventListener("click", async (event) => {
+    form = document.querySelector('.search');
     event.preventDefault();
     let formdata = new FormData(form);
     let from = formdata.get("from");
     let to = formdata.get("to");
     let seatNum = formdata.get("seat-num");
     let classType = formdata.get("class");
+    
+    console.log(from)
+    console.log(to)
+    console.log(classType)
+    console.log(seatNum)
+    console.log(form)
     document.querySelector('.seats').innerHTML = "Available "+classType+" Seats";
     let flights = await getFlights(from, to, classType,seatNum);
     let table = document.querySelector(".search-table");
@@ -80,15 +142,22 @@ button.addEventListener("click", async (event) => {
                             "<td>" + flight.destination + "</td>" +
                             "<td>" + flight.availableSeats + "</td>" +
                             "<td>" + flight.price + "</td>";
-            error.style.opacity = 0;
-            table.style.opacity = 1;
-            booking.style.opacity = 1;
-            tbody.appendChild(row);
-        }
+                            
+                            tbody.appendChild(row);
+                        }
+        error.style.opacity = 0;
+        table.style.opacity = 1;
+        booking.style.opacity = 1;
+        hideMyFlightTable()
+        hideEditContainer()
+        hideUpdateCustomerContainer()
     }else{
         error.style.opacity = 1; 
         table.style.opacity = 0;
         booking.style.opacity = 0;
+        hideMyFlightTable()
+        hideEditContainer()
+        hideUpdateCustomerContainer()
     }
 
 
@@ -112,7 +181,7 @@ fidInput.addEventListener('input', () => {
 
 
 async function bookFlight(flightId,customerId, classType, requiredSeats) { 
-   return await eel.getFlights(flightId,customerId, classType, requiredSeats)();
+   return await eel.bookFlight(flightId,customerId, classType, requiredSeats)();
 }
 
 
@@ -128,8 +197,9 @@ bookbtn.addEventListener("click", async (event) => {
     console.log(classType);
     console.log(seatNum);
     await bookFlight(flightId,customerId,classType,seatNum);
-    setTimeout(() => {document.querySelector('.success-message').style.opacity = 1;}, 3000);
-    document.querySelector('.success-message').style.opacity = 0;
+    hideUpdateCustomerContainer()
+    document.querySelector('.success-message').style.opacity = 1;
+    setTimeout(() => {document.querySelector('.success-message').style.opacity = 0;}, 3000);
     
 });
 
@@ -159,13 +229,21 @@ async function getSeats(){
                         
         tbody.appendChild(row);
         editerror.style.opacity = 0;
-        table.style.opacity = 1;
-        editContainer.style.opacity = 1;
+        
     }
+    document.querySelector('.myflight-table-container').style.opacity = 1;
+    document.querySelector('.myflight-table-container').style.display = "block";
+    // editContainer.style.opacity = 1;
+    hideSearchTable()
+    hideBookContainer()
+    hideUpdateCustomerContainer()
 }else{
     editerror.style.opacity = 1; 
     table.style.opacity = 0;
     editContainer.style.opacity = 0;
+    hideSearchTable()
+    hideBookContainer()
+    hideUpdateCustomerContainer()
 }
 }
 
@@ -196,10 +274,10 @@ updateCustBtn.addEventListener("click", async () => {
 
 function showUpdateCustomerContainer(){
     document.querySelector('.update-customer-container').style.opacity = 1
-    document.querySelector('.success-message').style.opacity = 0;
-    document.querySelector(".search-table").style.opacity = 0;
-    document.querySelector('.search-error').style.opacity = 0;
-    document.querySelector('.book-container').style.opacity = 0;
+    hideSearchTable()
+    hideMyFlightTable()
+    hideBookContainer()
+    hideEditContainer()
 
 }
 

@@ -31,7 +31,6 @@ class Customer:
     
 
 class CustomerDB:
-    customernum = 1
     def __init__(self):
         self.customers = []
         try:
@@ -63,7 +62,7 @@ class CustomerDB:
 
     def addCustomer(self,username, password,email,birthdate):
         flag = True
-        id = self.__class__.customernum
+        id = len(self.customers)
         if self.customers:
             for c in self.customers:
                 if c.id == id:
@@ -77,7 +76,6 @@ class CustomerDB:
                 conn.commit()
                 self.customers.append(customer)
                 print("Customer Added Successfully")
-                self.__class__.customernum+=1
                 return True
             except pyodbc.Error as e:
                 print(f"Error Adding Customer: {e}")
@@ -120,7 +118,6 @@ class CustomerDB:
                 conn.commit()
                 
                 self.customers.remove(c)
-                self.__class__.customernum -=1
                 print("Customer deleted successfully.")
             except pyodbc.Error as e:
                 print(f"Error deleting customer: {e}")
@@ -152,6 +149,7 @@ class CustomerDB:
     def clearDB(self):
         try:
             cursor.execute(f"DELETE FROM CustomerDB")
+            conn.commit()
             self.customers.clear()
             print("Customer Database Cleared Successfully")
         except pyodbc.Error as e:
@@ -163,5 +161,6 @@ class CustomerDB:
         count = cursor.fetchone()[0]
         return count        
             
-# customerDB = CustomerDB()
+customerDB = CustomerDB()
+customerDB.clearDB()
 # customerDB.displayCustomers()
